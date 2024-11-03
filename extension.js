@@ -17,13 +17,17 @@ function activate(context) {
 		panel.webview.html = getWebviewContent();
 		panel.webview.onDidReceiveMessage(
 			message => {
-				if (message.command === 'openLink' && message.url) {
-					panel.webview.html = getWebviewContentWithURL(message.url);
+				if (message.command === 'openLink') {
+					console.log('URL received:', message.url); // Add log to verify URL
+					if (message.url) {
+						panel.webview.html = getWebviewContentWithURL(message.url);
+					} else {
+						console.error('Error: URL is null or undefined');
+						vscode.window.showErrorMessage('The URL is missing or invalid.');
+					}
 				} else if (message.command === 'goBack') {
 					panel.webview.html = getWebviewContent();
-				} else {
-					console.error('Received message with null or undefined URL');
-				}
+				};
 			},
 			undefined,
 			context.subscriptions
@@ -33,6 +37,8 @@ function activate(context) {
 
 	context.subscriptions.push(disposable);
 }
+
+
 function getWebviewContent() {
 	return `<!DOCTYPE html>
 	<html lang="en">
@@ -107,11 +113,12 @@ button:active {
 			const vscode = acquireVsCodeApi();
 		
 			// Send a message to open a specific URL 
-			function openLink(url) {
+		function openLink(url) {
+    console.log('Opening link:', url); // Log the URL to verify it’s correct
     if (url) {
         vscode.postMessage({ command: 'openLink', url: url });
     } else {
-        console.error('URL is null or undefined');
+        console.error('Error: URL is null or undefined');
     }
 }
 		</script>
@@ -121,6 +128,16 @@ button:active {
 
 
 function getWebviewContentWithURL(url) {
+	console.log('Generating content with URL:', url)
+	if (!url) {
+        console.error('URL is null or undefined');
+        return `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head><title>Error</title></head>
+        <body><p>Error: URL is missing or invalid.</p></body>
+        </html>`;
+    }
 	return `
 		<!DOCTYPE html>
 		<html lang="en">

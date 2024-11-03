@@ -1,10 +1,11 @@
 {
-  "name": "m-helper",
   "displayName": "m-helper",
   "description": "this extension help you to learn new language",
+  "name": "m-helper",
+  "publisher": "Mehebubkalapati",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.95.0"
+    "vscode": "^1.86.1"
   },
   "categories": [
     "Other"
