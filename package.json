@@ -1,10 +1,10 @@
 {
   "displayName": "m-helper",
-  "description": "this extension help you to learn new language",
+  "description": "This extension helps you to learn new languages",
   "name": "m-helper",
   "publisher": "Mehebubkalapati",
   "icon": "image/image.png",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.95.0"
   },
@@ -14,10 +14,34 @@
   "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "m-helper.helloWorld",
-      "title": "Hello World"
-    }]
+    "commands": [
+      {
+        "command": "m-helper.helloWorld",
+        "title": "wellcome to m-helper"
+      },
+      {
+        "command": "m-helper.openPanel",
+        "title": "Open M-Helper Panel"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "m-helper-container",
+          "title": "M-Helper",
+          "icon": "image/image.png"
+        }
+      ]
+    },
+    "views": {
+      "m-helper-container": [
+        {
+          "id": "m-helper-view",
+          "name": "Helper",
+          "type": "tree"
+        }
+      ]
+    }
   },
   "scripts": {
     "lint": "eslint .",

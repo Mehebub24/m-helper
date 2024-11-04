@@ -5,7 +5,7 @@ const vscode = require('vscode');
 function activate(context) {
 	console.log('Congratulations, your extension "m-helper" is now active!');
 
-	const disposable = vscode.commands.registerCommand('m-helper.helloWorld', function () {
+	const disposable = vscode.commands.registerCommand('m-helper.openPanel', function () {
 		vscode.window.showInformationMessage('Hello World from m-helper!');
 
 		const panel = vscode.window.createWebviewPanel(
